@@ -1,0 +1,44 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: githubhook
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: python3.6
+
+package:
+  include:
+    - handler.py
+  exclude:
+    - requirements.txt
+    - serverless.yml
+    - README.md
+    - .env
+
+functions:
+  push:
+    handler: handler.push
+    environment:
+      SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
+    events:
+      - http:
+          path: /push
+          method: post
+
+plugins:
+  - serverless-python-requirements
