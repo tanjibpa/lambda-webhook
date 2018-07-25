@@ -1,0 +1,1 @@
+## A simple Lambda function which catches push events in a repo and then send commit messages to Slack!
